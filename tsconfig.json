@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": ["es5", "es6", "ES2018"],
+    "module": "CommonJS",
+    "experimentalDecorators": true, // decorators typeorm
+    "emitDecoratorMetadata": true, // decorators typeorm
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noImplicitAny": false, // executa nodemon
+    "outDir": "build", // diretorio de saída
+    "rootDir": "src" // diretório de origem
+  },
+  "compileOnSave": true,
+  "include": ["src"]
+}
