@@ -90,7 +90,7 @@ export class UnidadeService {
         return unidade
     }
 
-    async delete({ id_unidade }: findOneUnidadeRequest): Promise <Unidade | Error> {
+    async delete({ id_unidade }: findOneUnidadeRequest): Promise <String | Error> {
         const unidade = await cursor.findOne({ where : {id_unidade}})
         if (!unidade) {
             return new Error("Unidade Não Encontrada!")
@@ -98,6 +98,6 @@ export class UnidadeService {
 
         await cursor.delete(unidade.id_unidade)
 
-        return unidade
+        return "Curso Excluído Com Sucesso!"
     }
 }
