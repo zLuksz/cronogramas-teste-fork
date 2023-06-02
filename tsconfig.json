@@ -3,15 +3,25 @@
     "target": "ES2018",
     "lib": ["es5", "es6", "ES2018"],
     "module": "CommonJS",
-    "experimentalDecorators": true, // decorators typeorm
-    "emitDecoratorMetadata": true, // decorators typeorm
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowJs": true,
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noImplicitAny": false, // executa nodemon
-    "outDir": "build", // diretorio de saída
-    "rootDir": "src" // diretório de origem
+    "noImplicitAny": false,
+    "outDir": "build",
+    "rootDir": "src",
+    // "baseUrl": "./",
+    // "paths": {
+    //   //   "@controllers": ["controllers/*"],
+    //   //   "@connections": ["databases/connections"],
+    //   "@models": ["./src/databases/models/*"]
+    //   //   "@databases": ["databases/*"],
+    //   //   "@routes": ["routes/*"],
+    //   //   "@services": ["services/*"]
+    // }
   },
   "compileOnSave": true,
-  "include": ["src"]
+  "include": ["./src/**/*.ts", "src/index.ts"],
+  "exclude": ["node_modules"]
 }
