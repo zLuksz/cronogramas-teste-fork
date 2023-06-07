@@ -1,7 +1,7 @@
 import { Router } from "express";
 import CursoController from "../controllers/controllerCurso";
 import UnidadeController from "../controllers/constrollerUnidade";
-import TurmaController from "../controllers/constrollerTurma";
+import TurmaController from "../controllers/controllerTurma";
 
 
 const rotas = Router()
