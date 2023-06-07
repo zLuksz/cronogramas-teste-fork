@@ -32,6 +32,15 @@ export default class UnidadeController {
         return response.json(result)
     }
 
+    async readOne(request: Request, response: Response) {
+        const { id_unidade } = request.params
+        const result = await service.readOne({ id_unidade })
+        if (result instanceof Error) {
+          return response.status(404).json(result.message)
+        }
+        return response.json(result)
+      }
+
     async update(request: Request, response: Response) {
         const {id_unidade} = request.params
         const {descricao_unidade, carga_horaria_unidade, ordem, fk_curso} = request.body
