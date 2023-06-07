@@ -17,11 +17,11 @@ rotas.put("/cursos/:id", new CursoController().update)
 rotas.delete("/cursos/:id", new CursoController().delete)
 
 //Turma
-//rotas.post("/turmas", new TurmaController().create)
-//rotas.get("/turmas", new TurmaController().readAll)
-//rotas.get("/turmas/:id", new TurmaController().readOne)
-//rotas.put("/turmas/:id", new TurmaController().update)
-//rotas.delete("/turmas/:id", new TurmaController().delete)
+rotas.post("/turmas", new TurmaController().create)
+rotas.get("/turmas", new TurmaController().readAll)
+rotas.get("/turmas/:id", new TurmaController().readOne)
+rotas.put("/turmas/:id", new TurmaController().update)
+rotas.delete("/turmas/:id", new TurmaController().delete)
 
 //Unidade
 rotas.post("/Unidades", new UnidadeController().create)
