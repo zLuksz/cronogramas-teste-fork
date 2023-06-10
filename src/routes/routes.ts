@@ -2,6 +2,7 @@ import { Router } from "express"
 import CursoController from "../controllers/controllerCurso"
 import TurmaController from "../controllers/controllerTurma"
 import UnidadeController from "../controllers/controllerUnidade"
+import RecessoController from "../controllers/controllerRecesso"
 
 const rotas = Router()
 
@@ -29,5 +30,12 @@ rotas.get("/unidades", new UnidadeController().readAll)
 rotas.get("/unidades/:id_unidade", new UnidadeController().readOne)
 rotas.put("/unidades/:id_unidade", new UnidadeController().update)
 rotas.delete("/unidades/:id_unidade", new UnidadeController().delete)
+
+//Recesso
+rotas.post("/recessos", new RecessoController().create)
+rotas.get("/recessos", new RecessoController().readAll)
+rotas.get("/recessos/:id_recesso", new RecessoController().readOne)
+rotas.put("/recessos/:id_recesso", new RecessoController().update)
+rotas.delete("/recessos/:id_recesso", new RecessoController().delete)
 
 export default rotas
