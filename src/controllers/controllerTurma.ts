@@ -5,13 +5,12 @@ const service = new TurmaService()
 
 export default class CursoController {
   async create(request: Request, response: Response) {
-    const {fk_curso, data_inicio , data_fim , horas_aula_dia } =
+    const {fk_curso, data_inicio, horas_aula_dia } =
       request.body
 
     const result = await service.create({
         fk_curso,
         data_inicio,
-        data_fim,
         horas_aula_dia,
     })
 

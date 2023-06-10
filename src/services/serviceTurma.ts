@@ -10,7 +10,6 @@ const cursor = AppDataSource.getRepository(Turma)
 type newTurmaRequest = {
     fk_curso: string
     data_inicio: Date
-    data_fim: Date
     horas_aula_dia: Number
 }
 
@@ -33,7 +32,6 @@ export class TurmaService {
   async create({
     fk_curso,
     data_inicio,
-    data_fim,
     horas_aula_dia,
     }: newTurmaRequest): Promise<Turma | Error> {
     if (await cursor.findOne({ where: { fk_curso } })) {
@@ -42,7 +40,6 @@ export class TurmaService {
 
     const turma = cursor.create({
         data_inicio,
-        data_fim,
         horas_aula_dia,
         fk_curso,
     })
