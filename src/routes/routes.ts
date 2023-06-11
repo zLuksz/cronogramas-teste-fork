@@ -1,4 +1,5 @@
 import { Router } from "express"
+import AulaController from "../controllers/controllerAula"
 import CursoController from "../controllers/controllerCurso"
 import TurmaController from "../controllers/controllerTurma"
 import UnidadeController from "../controllers/controllerUnidade"
@@ -9,6 +10,13 @@ const rotas = Router()
 rotas.get("/", (request, response) => {
     return response.json("home page")
 })
+
+//Aula
+rotas.post("/aulas", new AulaController().create)
+rotas.get("/aulas", new AulaController().readAll)
+rotas.get("/aulas/:id_aula", new AulaController().readOne)
+rotas.put("/aulas/:id_aula", new AulaController().update)
+rotas.delete("/aulas/:id_aula", new AulaController().delete)
 
 //Curso
 rotas.post("/cursos", new CursoController().create)
