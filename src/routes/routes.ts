@@ -1,50 +1,41 @@
-import { Router } from "express";
+import { Router } from "express"
 import CursoController from "../controllers/controllerCurso"
-
-const rotas = Router()
-
-rotas.get("/", (request, response) => {
-    return response.json("Home Page")
-})
-
-rotas.post("/cursos", new CursoController().create)
-rotas.post("/cursos", new CursoController().readAll)
-rotas.post("/cursos/:id", new CursoController().readOne)
-rotas.post("/cursoss/:id", new CursoController().update)
-rotas.post("/cursos/id", new CursoController().delete)
-
-export default rotas
-
-import { Router } from "express";
 import TurmaController from "../controllers/controllerTurma"
-
-const rotas = Router()
-
-rotas.get("/", (request, response) => {
-    return response.json("Home Page")
-})
-
-rotas.post("/turmas", new TurmaController().create)
-rotas.post("/turmas", new TurmaController().readAll)
-rotas.post("/turmas/:id", new TurmaController().readOne)
-rotas.post("/turmas/:id", new TurmaController().update)
-rotas.post("/turmas/id", new TurmaController().delete)
-
-export default rotas
-
-import { Router } from "express";
 import UnidadeController from "../controllers/controllerUnidade"
+import RecessoController from "../controllers/controllerRecesso"
 
 const rotas = Router()
 
 rotas.get("/", (request, response) => {
-    return response.json("Home Page")
+    return response.json("home page")
 })
 
+//Curso
+rotas.post("/cursos", new CursoController().create)
+rotas.get("/cursos", new CursoController().readAll)
+rotas.get("/cursos/:id_curso", new CursoController().readOne)
+rotas.put("/cursos/:id_curso", new CursoController().update)
+rotas.delete("/cursos/:id_curso", new CursoController().delete)
+
+//Turma
+rotas.post("/turmas", new TurmaController().create)
+rotas.get("/turmas", new TurmaController().readAll)
+rotas.get("/turmas/:id_turma", new TurmaController().readOne)
+rotas.put("/turmas/:id_turma", new TurmaController().update)
+rotas.delete("/turmas/:id_turma", new TurmaController().delete)
+
+//Unidade
 rotas.post("/unidades", new UnidadeController().create)
-rotas.post("/unidades", new UnidadeController().readAll)
-rotas.post("/unidades/:id", new UnidadeController().readOne)
-rotas.post("/unidades/:id", new UnidadeController().update)
-rotas.post("/unidades/id", new UnidadeaController().delete)
+rotas.get("/unidades", new UnidadeController().readAll)
+rotas.get("/unidades/:id_unidade", new UnidadeController().readOne)
+rotas.put("/unidades/:id_unidade", new UnidadeController().update)
+rotas.delete("/unidades/:id_unidade", new UnidadeController().delete)
+
+//Recesso
+rotas.post("/recessos", new RecessoController().create)
+rotas.get("/recessos", new RecessoController().readAll)
+rotas.get("/recessos/:id_recesso", new RecessoController().readOne)
+rotas.put("/recessos/:id_recesso", new RecessoController().update)
+rotas.delete("/recessos/:id_recesso", new RecessoController().delete)
 
 export default rotas
