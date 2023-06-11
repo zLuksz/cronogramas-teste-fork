@@ -6,7 +6,7 @@ import Recesso from "../models/recesso"
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "postgres://dev:s9qzDErug5tmpW7lqzM2WHFKJgprRYOS@dpg-ci2iosak728i8t9n7i8g-a/cronogramas",
+  host: "dpg-ci2iosak728i8t9n7i8g-a.oregon-postgres.render.com",
   port: 5432,
   username: "dev",
   password: "s9qzDErug5tmpW7lqzM2WHFKJgprRYOS",
