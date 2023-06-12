@@ -26,6 +26,10 @@ type findOneUnidadeRequest = {
   id_unidade: string
 }
 
+type findOneFilterRequest = {
+  fk_curso: string
+}
+
 // 3) Funções CRUD
 
 export class UnidadeService {
@@ -64,6 +68,16 @@ export class UnidadeService {
       return new Error("Unidade não encontrada!")
     }
     return unidade
+  }
+
+  async readOneFilter({
+    fk_curso,
+  }: findOneFilterRequest) {
+    const unidades = await cursor.find({ where: { fk_curso }})
+    if (!unidades) {
+      return new Error ("Unidade não encontrada!")
+    }
+    return unidades
   }
 
   async update({
