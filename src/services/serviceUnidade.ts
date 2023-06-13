@@ -26,7 +26,7 @@ type findOneUnidadeRequest = {
   id_unidade: string
 }
 
-type findOneFk_CursoRequest = {
+type findOneFilterRequest = {
   fk_curso: string
 }
 
@@ -70,12 +70,14 @@ export class UnidadeService {
     return unidade
   }
 
-  async readOneFiltro({fk_curso,}: findOneFk_CursoRequest): Promise<Unidade | Error> {
-    const unidade = await cursor.findOne({ where: { fk_curso } })
-    if (!unidade) {
-      return new Error("Unidade não encontrada!")
+  async readOneFilter({
+    fk_curso,
+  }: findOneFilterRequest) {
+    const unidades = await cursor.find({ where: { fk_curso }})
+    if (!unidades) {
+      return new Error ("Unidade não encontrada!")
     }
-    return unidade
+    return unidades
   }
 
   async update({

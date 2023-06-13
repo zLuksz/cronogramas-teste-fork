@@ -38,11 +38,15 @@ export default class UnidadeController {
     return response.json(result)
   }
 
-  async readOneFiltro(request: Request, response: Response) {
+  async readOneFilter(request: Request, response: Response) {
     const { fk_curso } = request.params
-    const result = await service.readOneFiltro({ fk_curso })
+    const result = await service.readOneFilter({ fk_curso })
     if (result instanceof Error) {
-      return response.status(404).json(result.message)
+      return response.status(418).json(result.message)
+    }
+    else {
+      if (result.length < 1) {
+        return response.status(418).json("Nenhuma unidade cadastrada!")
     }
     return response.json(result)
   }
