@@ -1,22 +1,21 @@
 import { Request, Response } from "express"
-import {AulaService} from "../services/serviceAula"
+import { AulaService } from "../services/serviceAula"
 
 const service = new AulaService()
 
 export default class AulaController {
   async create(request: Request, response: Response) {
-    const {data_aula, status_aula, fk_turma, fk_unidade } =
-      request.body
+    const { data_aula, status_aula, fk_turma, fk_unidade } = request.body
 
     const result = await service.create({
-        data_aula,
-        status_aula,
-        fk_turma,
-        fk_unidade,
+      data_aula,
+      status_aula,
+      fk_turma,
+      fk_unidade,
     })
 
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.json(result)
   }
@@ -40,8 +39,7 @@ export default class AulaController {
 
   async update(request: Request, response: Response) {
     const { id_aula } = request.params
-    const { data_aula, status_aula, fk_turma, fk_unidade } =
-      request.body
+    const { data_aula, status_aula, fk_turma, fk_unidade } = request.body
     const result = await service.update({
       id_aula,
       data_aula,
@@ -50,7 +48,7 @@ export default class AulaController {
       fk_unidade,
     })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.json(result)
   }
@@ -59,9 +57,8 @@ export default class AulaController {
     const { id_aula } = request.params
     const result = await service.delete({ id_aula })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.status(300).json(result)
   }
-  
 }
