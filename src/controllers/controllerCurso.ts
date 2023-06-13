@@ -39,8 +39,17 @@ export default class CursoController {
   }
 
   async readOneFilter(request: Request, response: Response) {
-    const { eixo } = request.params
+    const { eixo } = request.body
     const result = await service.readOneFilter({ eixo })
+    if (result instanceof Error) {
+      return response.status(418).json(result.message)
+    }
+    return response.json(result)
+  }
+
+  async readOneFilterModalidade(request: Request, response: Response) {
+    const { modalidade } = request.body
+    const result = await service.readOneFilterModalidade({ modalidade })
     if (result instanceof Error) {
       return response.status(418).json(result.message)
     }

@@ -27,6 +27,10 @@ type findOneTurmaRequest = {
   id_turma: string
 }
 
+type findOneFilterRequest = {
+  turno:string
+}
+
 // 3) Funções CRUD
 
 export class TurmaService {
@@ -63,6 +67,14 @@ export class TurmaService {
       return new Error("Turma não encontrada!")
     }
     return turma
+  }
+
+  async FilterReadOne({ turno }: findOneFilterRequest) {
+    const curso = await cursor.find({ where: { turno }})
+    if (!curso) {
+      return new Error ("Turno não encontrado!")
+    }
+    return curso
   }
 
   async update({

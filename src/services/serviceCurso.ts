@@ -1,3 +1,4 @@
+import { Like } from "typeorm"
 import { AppDataSource } from "../databases/connections/datasourceDev"
 import Curso from "../databases/models/curso"
 
@@ -28,6 +29,10 @@ type findOneCursoRequest = {
 
 type findOneFilterRequest = {
   eixo: string
+}
+
+type findOneFilterModRequest = {
+  modalidade: string
 }
 
 // 3) Funções CRUD
@@ -68,14 +73,20 @@ export class CursoService {
     return curso
   }
 
-  async readOneFilter({
-    eixo,
-  }: findOneFilterRequest) {
-    const cursos = await cursor.findOne({ where: { eixo }})
-    if (!cursos) {
-      return new Error ("Curso não encontrado!")
+  async readOneFilter({ eixo }: findOneFilterRequest) {
+    const curso = await cursor.find({ where: { eixo }})
+    if (!curso) {
+      return new Error ("Eixo não encontrado!")
     }
-    return cursos
+    return curso
+  }
+
+  async readOneFilterModalidade({ modalidade }: findOneFilterModRequest) {
+    const curso = await cursor.find({ where: { modalidade }})
+    if (!curso) {
+      return new Error ("Modalidade não encontrada!")
+    }
+    return curso
   }
 
   async update({

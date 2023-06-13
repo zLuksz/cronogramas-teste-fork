@@ -38,6 +38,15 @@ export default class CursoController {
     return response.json(result)
   }
 
+  async FilterReadOne(request: Request, response: Response) {
+    const { turno } = request.body
+    const result = await service.FilterReadOne({ turno })
+    if (result instanceof Error) {
+      return response.status(418).json(result.message)
+    }
+    return response.json(result)
+  }
+
   async update(request: Request, response: Response) {
     const { id_turma } = request.params
     const { fk_curso, turno, data_inicio , data_fim , horas_aula_dia } =
