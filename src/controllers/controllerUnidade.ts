@@ -38,9 +38,9 @@ export default class UnidadeController {
     return response.json(result)
   }
 
-  async readOneFilter(request: Request, response: Response) {
+  async readByFkCurso(request: Request, response: Response) {
     const { fk_curso } = request.params
-    const result = await service.readOneFilter({ fk_curso })
+    const result = await service.readByFkCurso({ fk_curso })
     if (result instanceof Error) {
       return response.status(418).json(result.message)
     }
@@ -50,6 +50,7 @@ export default class UnidadeController {
     }
     return response.json(result)
   }
+}
 
   async update(request: Request, response: Response) {
     const { id_unidade } = request.params

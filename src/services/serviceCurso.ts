@@ -27,11 +27,11 @@ type findOneCursoRequest = {
   id_curso: string
 }
 
-type findOneFilterRequest = {
+type findByEixo = {
   eixo: string
 }
 
-type findOneFilterModRequest = {
+type findByModalidade = {
   modalidade: string
 }
 
@@ -73,18 +73,18 @@ export class CursoService {
     return curso
   }
 
-  async readOneFilter({ eixo }: findOneFilterRequest) {
+  async readByEixo({ eixo }: findByEixo) {
     const curso = await cursor.find({ where: { eixo }})
     if (!curso) {
-      return new Error ("Eixo não encontrado!")
+      return new Error ("Não foi encontrado curso neste eixo!")
     }
     return curso
   }
 
-  async readOneFilterModalidade({ modalidade }: findOneFilterModRequest) {
+  async readByModalidade({ modalidade }: findByModalidade) {
     const curso = await cursor.find({ where: { modalidade }})
     if (!curso) {
-      return new Error ("Modalidade não encontrada!")
+      return new Error ("Não foi encontrado curso nesta modalidade!")
     }
     return curso
   }

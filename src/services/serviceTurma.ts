@@ -27,7 +27,7 @@ type findOneTurmaRequest = {
   id_turma: string
 }
 
-type findOneFilterRequest = {
+type findByTurno = {
   turno:string
 }
 
@@ -69,7 +69,7 @@ export class TurmaService {
     return turma
   }
 
-  async FilterReadOne({ turno }: findOneFilterRequest) {
+  async readByTurno({ turno }: findByTurno) {
     const curso = await cursor.find({ where: { turno }})
     if (!curso) {
       return new Error ("Turno não encontrado!")

@@ -26,7 +26,7 @@ type findOneUnidadeRequest = {
   id_unidade: string
 }
 
-type findOneFilterRequest = {
+type findByFkCurso = {
   fk_curso: string
 }
 
@@ -70,9 +70,9 @@ export class UnidadeService {
     return unidade
   }
 
-  async readOneFilter({
+  async readByFkCurso({
     fk_curso,
-  }: findOneFilterRequest) {
+  }: findByFkCurso) {
     const unidades = await cursor.find({ where: { fk_curso }})
     if (!unidades) {
       return new Error ("Unidade não encontrada!")
