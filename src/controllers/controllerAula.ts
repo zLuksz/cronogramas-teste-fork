@@ -1,33 +1,23 @@
-/*CREATE TABLE "aula" (
-    "id_aula" varchar PRIMARY KEY,
-    "data_aula" date NOT NULL DEFAULT 'now()',
-    "status_aula" varchar NOT NULL DEFAULT 'pendente',
-    "fk_turma" varchar,
-    "fk_unidade" varchar
-  );*/
-
-  import { Request, Response } from "express"
+import { Request, Response } from "express"
 import { AulaService } from "../services/serviceAula"
 
 const service = new AulaService()
 
-export default class aulaController {
+export default class AulaController {
   async create(request: Request, response: Response) {
-    const { id_aula, data_aula, status_aula, fk_turma, fk_unidade } =
-      request.body
+    const { data_aula, status_aula, fk_turma, fk_unidade } = request.body
 
     const result = await service.create({
-        id_aula,
-        data_aula,
-        status_aula,
-        fk_turma,
-        fk_unidade,
+      data_aula,
+      status_aula,
+      fk_turma,
+      fk_unidade,
     })
 
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
-    return response.status(200).json(result)
+    return response.json(result)
   }
 
   async readAll(request: Request, response: Response) {
@@ -72,5 +62,4 @@ export default class aulaController {
     }
     return response.status(300).json(result)
   }
-
 }

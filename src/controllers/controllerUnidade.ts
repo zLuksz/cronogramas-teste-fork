@@ -38,6 +38,15 @@ export default class UnidadeController {
     return response.json(result)
   }
 
+  async readOneFiltro(request: Request, response: Response) {
+    const { fk_curso } = request.params
+    const result = await service.readOneFiltro({ fk_curso })
+    if (result instanceof Error) {
+      return response.status(404).json(result.message)
+    }
+    return response.json(result)
+  }
+
   async update(request: Request, response: Response) {
     const { id_unidade } = request.params
     const { descricao_unidade, carga_horaria_unidade, ordem, fk_curso } =

@@ -1,15 +1,12 @@
-/*CREATE TABLE "aula" (
-    "id_aula" varchar PRIMARY KEY,
-    "data_aula" date NOT NULL DEFAULT 'now()',
-    "status_aula" varchar NOT NULL DEFAULT 'pendente',
-    "fk_turma" varchar,
-    "fk_unidade" varchar
-  );*/
-
 import { AppDataSource } from "../databases/connections/data-source"
 import Aula from "../databases/models/aula"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um aular
+
+import { AppDataSource } from "../databases/connections/datasourceDev"
+import Aula from "../databases/models/aula"
+
+// 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
 
 const cursor = AppDataSource.getRepository(Aula)
 
@@ -31,7 +28,7 @@ type updateAulaRequest = {
     fk_unidade:string
 }
 
-type findOneaulaRequest = {
+type findOneAulaRequest = {
   id_aula: string
 }
 
@@ -55,6 +52,15 @@ export class AulaService {
         status_aula,
         fk_turma,
         fk_unidade,
+    if (await cursor.findOne({ where: { fk_turma, data_aula } })) {
+      return new Error("Aula já cadastrada!")
+    }
+
+    const aula = cursor.create({
+      data_aula,
+      status_aula,
+      fk_turma,
+      fk_unidade,
     })
 
     await cursor.save(aula)
@@ -67,7 +73,7 @@ export class AulaService {
     return aulas
   }
 
-  async readOne({ id_aula }: findOneaulaRequest): Promise<Aula | Error> {
+  async readOne({ id_aula }: findOneAulaRequest): Promise<Aula | Error> {
     const aula = await cursor.findOne({ where: { id_aula } })
     if (!aula) {
       return new Error("Aula não encontrada!")
@@ -84,15 +90,11 @@ export class AulaService {
   }: updateAulaRequest): Promise<Aula | Error> {
     const aula = await cursor.findOne({ where: { id_aula } })
     if (!aula) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Aula não encontrada!")
     }
 
-    aula.data_aula = data_aula
-      ? data_aula
-      : aula.data_aula
-    aula.status_aula = status_aula
-      ? status_aula
-      : aula.status_aula
+    aula.data_aula = data_aula ? data_aula : aula.data_aula
+    aula.status_aula = status_aula ? status_aula : aula.status_aula
     aula.fk_turma = fk_turma ? fk_turma : aula.fk_turma
     aula.fk_unidade = fk_unidade ? fk_unidade : aula.fk_unidade
 
@@ -101,13 +103,12 @@ export class AulaService {
     return aula
   }
 
-  async delete({ id_aula }: findOneaulaRequest): Promise<String | Error> {
+  async delete({ id_aula }: findOneAulaRequest): Promise<String | Error> {
     const aula = await cursor.findOne({ where: { id_aula } })
     if (!aula) {
-      return new Error("aula não encontrado!")
+      return new Error("Aula não encontrada!")
     }
     await cursor.delete(aula.id_aula)
-    return "aula excluído com sucesso!"
+    return "Aula excluída com sucesso!"
   }
-
 }
