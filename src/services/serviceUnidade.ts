@@ -26,6 +26,10 @@ type findOneUnidadeRequest = {
   id_unidade: string
 }
 
+type findOneFk_CursoRequest = {
+  fk_curso: string
+}
+
 // 3) Funções CRUD
 
 export class UnidadeService {
@@ -60,6 +64,14 @@ export class UnidadeService {
     id_unidade,
   }: findOneUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
+    if (!unidade) {
+      return new Error("Unidade não encontrada!")
+    }
+    return unidade
+  }
+
+  async readOneFiltro({fk_curso,}: findOneFk_CursoRequest): Promise<Unidade | Error> {
+    const unidade = await cursor.findOne({ where: { fk_curso } })
     if (!unidade) {
       return new Error("Unidade não encontrada!")
     }
