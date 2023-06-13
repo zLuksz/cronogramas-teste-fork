@@ -1,4 +1,5 @@
 import { Router } from "express"
+import AulaController from "../controllers/controllerAula"
 import CursoController from "../controllers/controllerCurso"
 import TurmaController from "../controllers/controllerTurma"
 import UnidadeController from "../controllers/controllerUnidade"
@@ -9,6 +10,13 @@ const rotas = Router()
 rotas.get("/", (request, response) => {
     return response.json("home page")
 })
+
+//Aula
+rotas.post("/aulas", new AulaController().create)
+rotas.get("/aulas", new AulaController().readAll)
+rotas.get("/aulas/:id_aula", new AulaController().readOne)
+rotas.put("/aulas/:id_aula", new AulaController().update)
+rotas.delete("/aulas/:id_aula", new AulaController().delete)
 
 //Curso
 rotas.post("/cursos", new CursoController().create)
@@ -24,6 +32,7 @@ rotas.post("/turmas", new TurmaController().create)
 rotas.get("/turmas", new TurmaController().readAll)
 rotas.get("/turmas/turno", new TurmaController().FilterReadOne)
 rotas.get("/turmas/:id_turma", new TurmaController().readOne)
+rotas.get("/turmas/:turno", new TurmaController().readOneFiltro)
 rotas.put("/turmas/:id_turma", new TurmaController().update)
 rotas.delete("/turmas/:id_turma", new TurmaController().delete)
 
@@ -32,6 +41,7 @@ rotas.post("/unidades", new UnidadeController().create)
 rotas.get("/unidades", new UnidadeController().readAll)
 rotas.get("/unidades/fk_curso", new UnidadeController().readOneFilter)
 rotas.get("/unidades/:id_unidade", new UnidadeController().readOne)
+rotas.get("/unidades/:fk_curso", new UnidadeController().readOneFiltro)
 rotas.put("/unidades/:id_unidade", new UnidadeController().update)
 rotas.delete("/unidades/:id_unidade", new UnidadeController().delete)
 

@@ -47,7 +47,6 @@ export default class UnidadeController {
     else {
       if (result.length < 1) {
         return response.status(418).json("Nenhuma unidade cadastrada!")
-      }
     }
     return response.json(result)
   }

@@ -29,7 +29,7 @@ export class RecessoService {
     descricao_recesso,
     data_recesso,
   }: newRecessoRequest): Promise<Recesso | Error> {
-    if (await cursor.findOne({ where: { descricao_recesso } })) {
+    if (await cursor.findOne({ where: { data_recesso } })) {
       return new Error("Recesso já cadastrado!")
     }
 
