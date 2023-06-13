@@ -1,3 +1,8 @@
+import { AppDataSource } from "../databases/connections/data-source"
+import Aula from "../databases/models/aula"
+
+// 1) Estabelece conexão com a tabela alvo no banco de dados através de um aular
+
 import { AppDataSource } from "../databases/connections/datasourceDev"
 import Aula from "../databases/models/aula"
 
@@ -8,18 +13,19 @@ const cursor = AppDataSource.getRepository(Aula)
 // 2) Recebe dados da Requisição HTTP lá do FRONTEND
 
 type newAulaRequest = {
-  data_aula: Date
-  status_aula: string
-  fk_turma: string
-  fk_unidade: string
+    id_aula: string
+    data_aula: Date
+    status_aula: string
+    fk_turma:string
+    fk_unidade:string
 }
 
 type updateAulaRequest = {
-  id_aula: string
-  data_aula: Date
-  status_aula: string
-  fk_turma: string
-  fk_unidade: string
+    id_aula: string
+    data_aula: Date
+    status_aula: string
+    fk_turma:string
+    fk_unidade:string
 }
 
 type findOneAulaRequest = {
@@ -30,11 +36,22 @@ type findOneAulaRequest = {
 
 export class AulaService {
   async create({
+    id_aula,
     data_aula,
     status_aula,
     fk_turma,
     fk_unidade,
   }: newAulaRequest): Promise<Aula | Error> {
+    if (await cursor.findOne({ where: { fk_turma } })) {
+      return new Error("Aula já cadastrado!")
+    }
+
+    const aula = cursor.create({
+        id_aula,
+        data_aula,
+        status_aula,
+        fk_turma,
+        fk_unidade,
     if (await cursor.findOne({ where: { fk_turma, data_aula } })) {
       return new Error("Aula já cadastrada!")
     }
