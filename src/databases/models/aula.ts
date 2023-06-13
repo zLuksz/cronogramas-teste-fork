@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid"
 
 @Entity("aula")
 export default class Aula {
-
   //chave primária
   @PrimaryColumn()
   id_aula: string

@@ -23,9 +23,9 @@ export default class AulaController {
   async readAll(request: Request, response: Response) {
     const result = await service.readAll()
     if (result.length < 1) {
-      return response.status(400).json("Nenhuma aula cadastrada!")
+      return response.json("Nenhuma aula cadastrada!")
     }
-    return response.status(200).json(result)
+    return response.json(result)
   }
 
   async readOne(request: Request, response: Response) {
@@ -39,17 +39,16 @@ export default class AulaController {
 
   async update(request: Request, response: Response) {
     const { id_aula } = request.params
-    const {  data_aula, status_aula, fk_turma, fk_unidade } =
-      request.body
+    const { data_aula, status_aula, fk_turma, fk_unidade } = request.body
     const result = await service.update({
-        id_aula,
-        data_aula,
-        status_aula,
-        fk_turma,
-        fk_unidade,
+      id_aula,
+      data_aula,
+      status_aula,
+      fk_turma,
+      fk_unidade,
     })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.json(result)
   }
@@ -58,7 +57,7 @@ export default class AulaController {
     const { id_aula } = request.params
     const result = await service.delete({ id_aula })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.status(300).json(result)
   }
